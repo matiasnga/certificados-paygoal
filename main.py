@@ -1,71 +1,68 @@
+import pandas as pd
 import pdfkit
-import read_file
 import os
 import time
 
-lista_certificados = read_file.read_file("demo_cert.xlsx")
+
+def open_file(archivo):
+    excel_file = "input/" + archivo
+    data = pd.read_excel(excel_file)
+    return data.to_dict(orient="records")
+
+
+pdf_options = {
+    'page-size': 'A4',
+    'margin-top': '25mm',
+    'margin-right': '0mm',
+    'margin-bottom': '0mm',
+    'margin-left': '20mm',
+    'encoding': "UTF-8",
+    'enable-local-file-access': '',
+    'zoom': 1.2,
+}
+
 tiempo_inicio_proceso = time.time()
+lista_certificados = open_file("demo_cert.xlsx")
 
-pdf_options = read_file.pdf_options()
-
-html_to_pdf = ""
-with open("template/certificado_template.html", "r") as f:
-    template_html = f.read()
-
+# Recorre la lista de certificados
 for i, certificado in enumerate(lista_certificados):
     tiempo_inicio_iteracion = time.time()
-    Titulo1 = str(certificado["Titulo1"])
-    html_to_pdf = (
-        template_html.replace("{{ Titulo1 }}", str(certificado["Titulo1"]))
-        .replace("{{ RazonSocial }}", str(certificado["RazonSocial"]))
-        .replace("{{ Direccion }}", str(certificado["Direccion"]))
-        .replace("{{ CodigoPostal }}", str(certificado["CodigoPostal"]))
-        .replace("{{ Localidad }}", str(certificado["Localidad"]))
-        .replace("{{ Provincia }}", str(certificado["Provincia"]))
-        .replace("{{ Fecha }}", str(certificado["Fecha"]))
-        .replace("{{ CUITAgente }}", str(certificado["CUITAgente"]))
-        .replace("{{ NroIIBB }}", str(certificado["NroIIBB"]))
-        .replace("{{ RazonSocialContribuyente }}", str(certificado["RazonSocialContribuyente"]))
-        .replace("{{ DireccionContribuyente }}", str(certificado["DireccionContribuyente"]))
-        .replace("{{ CodigoPostalContribuyente }}", str((certificado["CodigoPostalContribuyente"])).removesuffix(".0"))
-        .replace("{{ LocalidadContribuyente }}", str(certificado["LocalidadContribuyente"]))
-        .replace("{{ ProvinciaContribuyente }}", str(certificado["ProvinciaContribuyente"]))
-        .replace("{{ CUITContribuyente }}", str(certificado["CUITContribuyente"]))
-        .replace("{{ NroCertificado }}", str(certificado["NroCertificado"]))
-        .replace("{{ Impuesto }}", str(certificado["Impuesto"]))
-        .replace("{{ Condicion }}", str(certificado["Condicion"]))
-        .replace("{{ EnPalabras }}", str(certificado["EnPalabras"]))
-        .replace("{{ Referencia }}", str(certificado["Referencia"]))
-        .replace("{{ IdAgrupacionRetenciones }}", str(certificado["IdAgrupacionRetenciones"]))
-        .replace("{{ NombreApoderado }}", str(certificado["NombreApoderado"]))
-        .replace("{{ WithholdingAmount }}", str(certificado["WithholdingAmount"]))
-    )
+    cuit = ''.join([caracter for caracter in str(certificado["CUITContribuyente"]) if caracter != "-"])
+    output_path = "output/" + cuit + "/" + str(certificado["Impuesto"]) + " - " + str(
+        certificado["NroCertificado"]) + ".pdf"
 
-    cuit_sin_guines = ''.join([caracter for caracter in str(certificado["CUITContribuyente"]) if caracter != "-"])
-
-    output_path = "output/" + cuit_sin_guines + "/"
-
+    # Crea el directorio de salida si no existe
     if not os.path.exists(output_path):
         os.makedirs(output_path)
 
-    pdfkit.from_string(html_to_pdf,
-                       output_path + str(certificado["Impuesto"]) + " - " + str(certificado["NroCertificado"]) + ".pdf",
-                       options=pdf_options)
+    # Abre el template HTML desde un archivo
+    with open("template/certificado_template.html", "r", encoding='utf-8') as template_file:
+        template_html = template_file.read()
+    certificado['Fecha'] = str(certificado['Fecha'])[0:10]
+    certificado['CodigoPostalContribuyente'] = str(certificado['CodigoPostalContribuyente'])[0:4]
+
+    # Inserta el certificado en el HTML
+    html_template = template_html.format(**certificado)
+
+    # Guarda el contenido HTML en un archivo temporal
+    with open('temp.html', 'w', encoding='utf-8') as f:
+        f.write(html_template)
+
+    # Genera el archivo PDF
+    pdfkit.from_file('temp.html', output_path, options=pdf_options)
+
+    # Elimina el archivo temporal HTML
+    os.remove("temp.html")
 
     tiempo_fin_iteracion = time.time()
     tiempo_iteracion = tiempo_fin_iteracion - tiempo_inicio_iteracion
 
-    print("PDF #" + str(i + 1) + " de " + str(len(lista_certificados)) + " generado exitosamente. Tiempo de ejecución = " + str(round(tiempo_iteracion, 2)) + " segundos")
-#
-archivo_html = "output.html"
-
-# Guarda el contenido HTML en un archivo
-with open(archivo_html, "w", encoding="utf-8") as archivo:
-    archivo.write(html_to_pdf)
+    print("PDF #" + str(i + 1) + " de " + str(
+        len(lista_certificados)) + " generado exitosamente. Tiempo de ejecución = " + str(
+        round(tiempo_iteracion, 2)) + " segundos")
 
 tiempo_fin_proceso = time.time()
 tiempo_total_proceso_minutos = (tiempo_fin_proceso - tiempo_inicio_proceso) / 60
 
 print(f"Tiempo total del proceso = {tiempo_total_proceso_minutos:.2f} minutos")
-
 print("--------------------")

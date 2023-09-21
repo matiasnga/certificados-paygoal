@@ -3,83 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
- <style type="text/css">
-      h1, h2, h3, h4 {
-          font-family: Verdana;
-          font-weight: bold;
-          font-size: 14px;
-          line-height: 0
-      }
+    <link rel="stylesheet" type="text/css" href="./template/style.css">
 
-      h5 {
-          font-family: sans-serif;
-          font-weight: bold;
-          font-size: 12px;
-          line-height: 0
-      }
-
-      h6 {
-          font-family: sans-serif;
-          font-weight: normal;
-          font-size: 12px;
-          line-height: 12px;
-          margin: 0
-      }
-
-      span {
-          font-family: sans-serif;
-          font-weight: normal;
-          font-size: 12px;
-          line-height: 0;
-          padding-left: 5px;
-          padding-right: 5px
-      }
-
-      b {
-          font-family: sans-serif;
-          font-size: 12px;
-          line-height: 0;
-          padding-left: 5px;
-          padding-right: 5px;
-      }
-
-      table {
-          font-family: sans-serif;
-          font-weight: normal;
-          font-size: 13px;
-          border-collapse: collapse
-      }
-
-      table.totals tr:last-child{
-          border-top: 1px solid
-      }
-
-      table.totals tr td:nth-child(2){
-          text-align:left
-      }
-
-      table.totals tr td:nth-child(3),table.totals tr td:nth-child(4){
-          text-align:right
-      }
-
-      th {
-          border: solid thin;
-          text-align: center;
-          height: 25px;
-          padding-left: 5px;
-          padding-right: 5px
-      }
-
-      td {
-        text-align: center;
-        padding-left: 5px;
-        padding-right: 5px
-      }
-  </style>
 </head>
 <body>
         <div style="position:absolute; width:17cm; height:22cm; text-align:left; margin:0.5cm; padding:0">
-            <h1 style="text-align: center;" >{Titulo}</h1>
+            <h1 style="text-align: center;" >{Titulo1}</h1>
             <div style="position:relative; border:solid thin; height:285px">
             <div style="position:absolute; width:9cm; padding-left:0.5cm; padding-right:0.5cm">
                 <h5 >Datos del Agente de Retención</h5>
@@ -113,7 +42,7 @@
         </div>
         <div style="height:6cm; margin-top:2px">
             <h5 style="text-align:center;">Datos de la Retención Practicada</h5>
-            <h5 style="font-weight:normal"></h5>
+            <h5 style="font-weight:normal">{Referencia}</h5>
             <table class="totals" cellspacing="0" id="Retenciones">
                 <thead style="background-color:lightgray">
                     <tr>
@@ -133,17 +62,18 @@
                             <h6>Importe retención</h6>
                         </th>
                     </tr>
-                    <tr>
-                        <td> {Impuesto}</td>
-                        <td> {Referencia}</td>
 
-                        <td> {WithholdingAmount}</td>
+                </thead>
+                     <tr>
+                        <td> N/D</td>
+                        <td> N/D</td>
 
-                        <td> {WithholdingAmount}</td>
+                        <td> N/D</td>
+
+                        <td> N/D</td>
                         <td> {WithholdingAmount}</td>
 
                     </tr>
-                </thead>
                 <tbody style="font-family:sans-serif; font-size:smaller; vertical-align:top; text-align:right; padding:2px"></tbody>
             </table>
         </div>
