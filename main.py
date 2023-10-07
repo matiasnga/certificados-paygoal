@@ -4,9 +4,19 @@ import os
 import time
 import json
 from jinja2 import Template
-from tqdm import tqdm
 
-
+pdf_options = {
+    'page-size': 'A4',
+    'margin-top': '20mm',
+    'margin-right': '0mm',
+    'margin-bottom': '0mm',
+    'margin-left': '20mm',
+    'encoding': "UTF-8",
+    'enable-local-file-access': '',
+    'title': 'None',
+    'no-outline': None,
+    'zoom': 1.2,
+}
 def read_json_file():
     with open('input/demo_cert_json_1.json', 'r', encoding='utf-8') as file:
         data_dict = json.load(file)
@@ -23,24 +33,16 @@ tiempo_inicio_proceso = time.time()
 # lista_certificados = read_excel_file()
 lista_certificados = read_json_file()
 
-pdf_options = {
-    'page-size': 'A4',
-    'margin-top': '25mm',
-    'margin-right': '0mm',
-    'margin-bottom': '0mm',
-    'margin-left': '20mm',
-    'encoding': "UTF-8",
-    'enable-local-file-access': '',
-    'zoom': 1.2,
-}
+
 
 # Recorre la lista de certificados
-for i, certificado in tqdm(enumerate(lista_certificados), desc="procesando pdfs"):
+for i, certificado in enumerate(lista_certificados):
     tiempo_inicio_iteracion = time.time()
     cuit = ''.join([caracter for caracter in str(certificado["CUITContribuyente"]) if caracter != "-"])
     output_path = "output/" + cuit + "/"
     output_file = str(certificado["Impuesto"]) + " - " + str(
         certificado["NroCertificado"]) + ".pdf"
+    titulo_pdf = output_file
 
     # Crea el directorio de salida si no existe
     if not os.path.exists(output_path):
@@ -63,14 +65,14 @@ for i, certificado in tqdm(enumerate(lista_certificados), desc="procesando pdfs"
     pdfkit.from_file('temp.html', output_path + output_file, options=pdf_options)
 
     # Elimina el archivo temporal HTML
-    os.remove("temp.html")
+    # os.remove("temp.html")
 
     tiempo_fin_iteracion = time.time()
     tiempo_iteracion = tiempo_fin_iteracion - tiempo_inicio_iteracion
 
-    # print("PDF #" + str(i + 1) + " de " + str(
-    #     len(lista_certificados)) + " generado exitosamente. Tiempo de ejecución = " + str(
-    #     round(tiempo_iteracion, 2)) + " segundos")
+    print("PDF #" + str(i + 1) + " de " + str(
+        len(lista_certificados)) + " generado exitosamente. Tiempo de ejecución = " + str(
+        round(tiempo_iteracion, 2)) + " segundos")
 
 tiempo_fin_proceso = time.time()
 tiempo_total_proceso_minutos = (tiempo_fin_proceso - tiempo_inicio_proceso) / 60

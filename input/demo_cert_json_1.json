@@ -38,45 +38,7 @@
       }
     ]
   },
-  {
-    "Titulo1": "Certificado de Retención de Ingresos Brutos Ciudad de Buenos Aires",
-    "RazonSocial": "PLAY DIGITAL SA",
-    "Direccion": "LIBERTADOR DEL AV. 7208 Piso:4   T:II",
-    "CodigoPostal": "1429",
-    "Localidad": "CIUDAD AUTONOMA BUENOS AIRES",
-    "Provincia": "CIUDAD AUTONOMA BUENOS AIRES",
-    "Fecha": "15-10-2023",
-    "CUITAgente": "30-71682943-6",
-    "NroIIBB": 30716829436,
-    "RazonSocialContribuyente": "GALLO MATIAS NICOLAS",
-    "DireccionContribuyente": "SAN MARTIN AV. 7464",
-    "CodigoPostalContribuyente": "1419",
-    "LocalidadContribuyente": "CIUDAD AUTONOMA BUENOS AIRES",
-    "ProvinciaContribuyente": "CIUDAD AUTONOMA BUENOS AIRES",
-    "CUITContribuyente": "20-31477522-9",
-    "NroCertificado": "2319000000000001",
-    "Impuesto": 901,
-    "Condicion": "Habitualista",
-    "EnPalabras": "En palabras: Pesos argentinos, diez con 0\/100.",
-    "Referencia": "Período de Retenciones: OCTUBRE 2023 - 1era quincena",
-    "NombreApoderado": "Martín Quiroga",
-    "Retenciones": [
-      {
-        "TaxRegimeId": "31",
-        "TaxRegime": "Servicios de pagos, plataformas y aplicaciones informáticas",
-        "BaseRetencion": "$ 500,00",
-        "Alicuota": "2,00 %",
-        "Retencion": "$ 10,00"
-      },
-      {
-        "TaxRegimeId": "TOTAL",
-        "TaxRegime": "",
-        "BaseRetencion": "$ 500,00",
-        "Alicuota": "",
-        "Retencion": "$ 10,00"
-      }
-    ]
-  },
+
   {
     "Titulo1": "Certificado de Retención de Ingresos Brutos Tucumán",
     "RazonSocial": "PLAY DIGITAL SA",
@@ -152,6 +114,84 @@
         "BaseRetencion": "$ 10.000,00",
         "Alicuota": "",
         "Retencion": "$ 700,00"
+      }
+    ]
+  },
+  {
+    "Titulo1": "Certificado de Retención de Ingresos Brutos Ciudad de Buenos Aires",
+    "RazonSocial": "PLAY DIGITAL SA",
+    "Direccion": "LIBERTADOR DEL AV. 7208 Piso:4   T:II",
+    "CodigoPostal": "1429",
+    "Localidad": "CIUDAD AUTONOMA BUENOS AIRES",
+    "Provincia": "CIUDAD AUTONOMA BUENOS AIRES",
+    "Fecha": "15-10-2023",
+    "CUITAgente": "30-71682943-6",
+    "NroIIBB": 30716829436,
+    "RazonSocialContribuyente": "GALLO MATIAS NICOLAS",
+    "DireccionContribuyente": "SAN MARTIN AV. 7464",
+    "CodigoPostalContribuyente": "1419",
+    "LocalidadContribuyente": "CIUDAD AUTONOMA BUENOS AIRES",
+    "ProvinciaContribuyente": "CIUDAD AUTONOMA BUENOS AIRES",
+    "CUITContribuyente": "20-31477522-9",
+    "NroCertificado": "2319000000000001",
+    "Impuesto": 901,
+    "Condicion": "Habitualista",
+    "EnPalabras": "En palabras: Pesos argentinos, diez con 0\/100.",
+    "Referencia": "Período de Retenciones: OCTUBRE 2023 - 1era quincena",
+    "NombreApoderado": "Martín Quiroga",
+    "Retenciones": [
+      {
+        "TaxRegimeId": "31",
+        "TaxRegime": "Servicios de pagos, plataformas y aplicaciones informáticas",
+        "BaseRetencion": "$ 500,00",
+        "Alicuota": "2,00 %",
+        "Retencion": "$ 10,00"
+      },
+      {
+        "TaxRegimeId": "TOTAL",
+        "TaxRegime": "",
+        "BaseRetencion": "$ 500,00",
+        "Alicuota": "",
+        "Retencion": "$ 10,00"
+      }
+    ]
+  },
+  {
+    "Titulo1": "Certificado de Retención de Ingresos Brutos Santa Cruz",
+    "RazonSocial": "PLAY DIGITAL SA",
+    "Direccion": "LIBERTADOR DEL AV. 7208 Piso:3 Dpto:3.1 T:PPAL",
+    "CodigoPostal": "1429",
+    "Localidad": "CIUDAD AUTONOMA BUENOS AIRES",
+    "Provincia": "CIUDAD AUTONOMA BUENOS AIRES",
+    "Fecha": "15-09-2023",
+    "CUITAgente": "30-71682943-6",
+    "NroIIBB": 30716829436,
+    "RazonSocialContribuyente": "MUÑOZ, JORGE ORLANDO",
+    "DireccionContribuyente": "AV. PTE. DR. N. C. KIRCHNER 780 Dpto:14",
+    "CodigoPostalContribuyente": "9400",
+    "LocalidadContribuyente": "RIO GALLEGOS",
+    "ProvinciaContribuyente": "SANTA CRUZ",
+    "CUITContribuyente": "20-20211963-9",
+    "NroCertificado": "23179200000000000002",
+    "Impuesto": 901,
+    "Condicion": "Grupo recaudación T",
+    "EnPalabras": "En palabras: Pesos argentinos, ciento noventa y ocho con 0\/100.",
+    "Referencia": "Período de Retenciones: SEPTIEMBRE 2023 - 1era quincena",
+    "NombreApoderado": "Martín Quiroga",
+    "Retenciones": [
+      {
+        "TaxRegimeId": "0",
+        "TaxRegime": "SIRTAC",
+        "BaseRetencion": "$ 9.900,00",
+        "Alicuota": "2,00 %",
+        "Retencion": "$ 198,00"
+      },
+      {
+        "TaxRegimeId": "TOTAL",
+        "TaxRegime": "",
+        "BaseRetencion": "$ 9.900,00",
+        "Alicuota": "",
+        "Retencion": "$ 198,00"
       }
     ]
   }

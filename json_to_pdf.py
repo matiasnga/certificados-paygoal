@@ -1,57 +1,24 @@
-from jinja2 import Template
+from xhtml2pdf import pisa
+from io import BytesIO
+
+# Ruta del archivo XHTML en el disco
+xhtml_file_path = "temp.html"
+
+# Ruta donde deseas guardar el archivo PDF
+output_pdf_path = "ejemplo.pdf"
+
+# Ruta del archivo CSS en el disco (si tienes uno)
+css_file_path = "template/style.css"
 
 
-def read_json_file():
-    with open('input/demo_cert_json.json', 'r') as file:
-        data_dict = json.load(file)
-    return data_dict
+# Función para convertir el archivo XHTML en PDF con estilo CSS
+def convert_xhtml_to_pdf_with_css(xhtml_path, pdf_path, css_path=None):
+    with open(xhtml_path, "rb") as xhtml_file, open(pdf_path, "wb") as pdf_file:
+        if css_path:
+            pisa.CreatePDF(xhtml_file, pdf_file, path=css_path)
+        else:
+            pisa.CreatePDF(xhtml_file, pdf_file)
 
 
-# Plantilla HTML utilizando Jinja2
-html_template = """
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Certificado de Retención</title>
-</head>
-<body>
-    <h1>{{ Titulo1 }}</h1>
-    <p>Razón Social: {{ RazonSocial }}</p>
-    <!-- Otros campos de datos... -->
-
-    <h2>Retenciones:</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>TaxRegimeId</th>
-                <th>TaxRegime</th>
-                <th>BaseRetencion</th>
-                <th>Alicuota</th>
-                <th>Retencion</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for retencion in Retenciones %}
-            <tr>
-                <td>{{ retencion['TaxRegimeId'] }}</td>
-                <td>{{ retencion['TaxRegime'] }}</td>
-                <td>{{ retencion['BaseRetencion'] }}</td>
-                <td>{{ retencion['Alicuota'] }}</td>
-                <td>{{ retencion['Retencion'] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
-"""
-
-# Compilar la plantilla
-template = Template(html_template)
-
-# Renderizar la plantilla con los datos
-output_html = template.render(**certificado)
-
-# Guardar el HTML generado en un archivo HTML temporal
-with open('certificado_retencion.html', 'w') as file:
-    file.write(output_html)
+# Convertir el archivo XHTML en PDF con estilo CSS
+convert_xhtml_to_pdf_with_css(xhtml_file_path, output_pdf_path, css_file_path)

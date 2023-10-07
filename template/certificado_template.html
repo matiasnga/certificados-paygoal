@@ -29,9 +29,9 @@
             </div>
         </div>
         <div style="position:absolute; left:10.5cm; width:5cm; padding-left:1.0cm; padding-right:0.5cm; margin-top:0.3cm">
-            <h5>Fecha:<span>{{Fecha}}</span></h5>
-            <h5>CUIT:<span>{{CUITAgente}}</span></h5>
-            <h5>Ingresos Brutos:<span>{{NroIIBB}}</span></h5>
+            <h5>Fecha: <span>{{Fecha}}</span></h5>
+            <h5>CUIT: <span>{{CUITAgente}}</span></h5>
+            <h5>Ingresos Brutos: <span>{{NroIIBB}}</span></h5>
 
             <div style="margin-top:2.4cm">
                 <h5>N° de certificado:</h5>
@@ -42,6 +42,7 @@
         </div>
         <div style="position:relative; top:95px; height:1cm; width:17cm; border-bottom:solid thin"></div>
     </div>
+
     <div style="height:6cm; margin-top:2px">
         <h5 style="text-align:center;">Datos de la Retención Practicada</h5>
         <h5 style="font-weight:normal">{{Referencia}}</h5>
@@ -60,7 +61,7 @@
                 <th style="width:50px">
                     <h6>Alícuota</h6>
                 </th>
-                <th style="width:50px">
+                <th style="width:100px">
                     <h6>Importe retención</h6>
                 </th>
             </tr>
@@ -83,10 +84,11 @@
     </div>
     <div style="position:absolute; width:17cm; padding-left:0.5cm; padding-right:0.5cm">
         <h5 style="font-weight:normal; line-height: 15px" id="EnPalabras">{{EnPalabras}}</h5>
-        <img style="position:absolute; width:auto; height:auto; left: 50%; top: 40%; transform: translate(-50%, -40%)"
-             alt="Firma" src="./template/Firma_30716589575.png"/>
+        <img style="position:relative; width:auto; height:auto; left: 40%; top: 40%; transform: translate(-80%, -40%)"
+             alt="Firma" src="./template/Firma_30716829436.png"/>
 
-        <h5 style="margin-top: 150px; font-weight:bold; text-align: center;" id="NombreApoderado">{{NombreApoderado}}</h5>
+        <h5 style="font-weight:bold; text-align: center;" id="NombreApoderado">
+            {{NombreApoderado}}</h5>
         <h5 style="font-weight:bold; text-align: center;" id="Caracter">APODERADO</h5>
         <h5 style="font-weight:normal; line-height: 15px" id="declaracion">Debido al redondeo de centavos en cada
             retención, podrías encontrar una diferencia al aplicar la alícuota sobre el monto base total de la quincena,
