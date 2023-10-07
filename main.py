@@ -28,7 +28,8 @@ lista_certificados = open_file("demo_cert.xlsx")
 for i, certificado in enumerate(lista_certificados):
     tiempo_inicio_iteracion = time.time()
     cuit = ''.join([caracter for caracter in str(certificado["CUITContribuyente"]) if caracter != "-"])
-    output_path = "output/" + cuit + "/" + str(certificado["Impuesto"]) + " - " + str(
+    output_path = "output/" + cuit + "/"
+    output_file = str(certificado["Impuesto"]) + " - " + str(
         certificado["NroCertificado"]) + ".pdf"
 
     # Crea el directorio de salida si no existe
@@ -49,7 +50,7 @@ for i, certificado in enumerate(lista_certificados):
         f.write(html_template)
 
     # Genera el archivo PDF
-    pdfkit.from_file('temp.html', output_path, options=pdf_options)
+    pdfkit.from_file('temp.html', output_path + output_file, options=pdf_options)
 
     # Elimina el archivo temporal HTML
     os.remove("temp.html")
