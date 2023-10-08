@@ -41,20 +41,17 @@ def establecer_conexion():
 
 # Intenta establecer la conexión
 conexion = establecer_conexion()
-data_dict = dict
+lista_certificados = dict
 # Verifica si la conexión se estableció correctamente
 if conexion:
     print("La conexión se estableció correctamente.")
     cursor = conexion.cursor()
     cursor.execute('EXEC GetJsonData')
     resultado = cursor.fetchone()[0]
-
-    # Imprime el resultado
-    print(resultado)
-    data_dict = json.loads(resultado)
-
+    lista_certificados = json.loads(resultado)
     # Cierra el cursor y la conexión
     cursor.close()
+    conexion.close()
     # Aquí puedes continuar con la ejecución de tu código, incluida la ejecución del procedimiento almacenado.
 else:
     print("La conexión no se pudo establecer. Revise la configuración de conexión.")
@@ -67,7 +64,6 @@ else:
 
 
 tiempo_inicio_proceso = time.time()
-lista_certificados = data_dict
 
 # Recorre la lista de certificados
 
@@ -77,7 +73,6 @@ for i, certificado in enumerate(lista_certificados):
     withholdingGroupingId = certificado['CUITContribuyente']
     output_path = "output/" + cuit + "/"
     output_file = str(certificado["Impuesto"]) + " - " + certificado["NroCertificado"] + ".pdf"
-    titulo_pdf = output_file
 
     # Crea el directorio de salida si no existe
     if not os.path.exists(output_path):
