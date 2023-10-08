@@ -1,6 +1,11 @@
+import json
 import pyodbc
 from dotenv import load_dotenv
 import os
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("certificados-paygoal-db")
 
 # Carga las variables de entorno desde el archivo .env
 load_dotenv()
@@ -33,3 +38,21 @@ def establecer_conexion():
     except pyodbc.Error as e:
         print(f"Error al conectar a la base de datos: {e}")
         return None
+
+
+def execute_sp(cuit_agente, periodo, id_impuesto, cuit_contribuyente):
+    conexion = establecer_conexion()
+
+    if conexion:
+        logger.info("La conexión a la base de datos se estableció correctamente.")
+        cursor = conexion.cursor()
+        cursor.execute('EXEC WithholdingCertificatesByShop ?, ?, ?, ?', cuit_agente, periodo, id_impuesto,
+                       cuit_contribuyente)
+        resultado = cursor.fetchone()[0]
+        lista_certificados = json.loads(resultado)
+        # Cierra el cursor y la conexión
+        cursor.close()
+        conexion.close()
+        return lista_certificados
+    else:
+        logger.info("La conexión a la base de datos no se pudo establecer.")
