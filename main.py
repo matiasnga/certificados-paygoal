@@ -36,7 +36,7 @@ logger.info('Comprimiendo archivos...')
 archivo_zip = output_path + '/certificados_' + cuit_agente + '_' + periodo
 
 
-shutil.make_archive(archivo_zip, 'zip', 'output/')
+shutil.make_archive(archivo_zip, 'zip', output_path)
 archivo_zip = archivo_zip + '.zip'
 
 utils.analizar_zip(archivo_zip)
