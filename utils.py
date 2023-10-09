@@ -10,6 +10,24 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("certificados-paygoal")
 
 
+def generar_zip(path, archivo_zip):
+    # Carpeta que deseas comprimir
+
+    # Nombre del archivo ZIP de salida
+
+    # Crea un objeto ZipFile en modo escritura
+    with zipfile.ZipFile(archivo_zip, 'w', zipfile.ZIP_DEFLATED) as archivo_zip:
+        # Itera a través de los archivos y carpetas dentro de la carpeta
+        for carpeta_actual, _, archivos in tqdm(os.walk(path), desc="Generando archivo zip"):
+            for archivo in archivos:
+                # Obtiene la ruta completa del archivo
+                ruta_completa = os.path.join(carpeta_actual, archivo)
+                # Agrega el archivo al archivo ZIP
+                archivo_zip.write(ruta_completa, os.path.relpath(ruta_completa, path))
+
+    print(f"Se ha creado el archivo ZIP '{archivo_zip}' con el contenido de la carpeta.")
+
+
 def analizar_zip(archivo):
     cantidad_archivos_pdf = 0
     size_unzipped = 0
@@ -41,7 +59,7 @@ def generate_pdf(lista_certificados, output_path):
             os.makedirs(output_path_file)
 
         # Abre el template HTML
-        with open("src/template/certificado_template.html", "r", encoding='utf-8') as certificado_template:
+        with open("template/certificado_template.html", "r", encoding='utf-8') as certificado_template:
             template = Template(certificado_template.read())
 
         # Obtiene la imagen de la firma desde el CUITagente
