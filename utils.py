@@ -41,7 +41,7 @@ def generate_pdf(lista_certificados, output_path):
             os.makedirs(output_path_file)
 
         # Abre el template HTML
-        with open("template/certificado_template.html", "r", encoding='utf-8') as certificado_template:
+        with open("src/template/certificado_template.html", "r", encoding='utf-8') as certificado_template:
             template = Template(certificado_template.read())
 
         # Obtiene la imagen de la firma desde el CUITagente
