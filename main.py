@@ -65,36 +65,31 @@ shutil.make_archive(archivo_zip, 'zip', 'output/')
 archivo_zip = archivo_zip + '.zip'
 
 
-def contar_archivos_pdf(zip_file):
+def contar_archivos_pdf(archivo):
     cantidad_archivos_pdf = 0
     tamano_zip = os.path.getsize(archivo_zip)
+    tamano_descomprimido = 0
 
-    for info in zip_file.infolist():
+    for info in archivo.infolist():
+        tamano_descomprimido += info.file_size
+
+    for info in archivo.infolist():
         # Verifica que el archivo tenga la extensión .pdf (ignora carpetas)
         if not info.is_dir() and info.filename.lower().endswith('.pdf'):
             cantidad_archivos_pdf += 1
 
-    return cantidad_archivos_pdf, tamano_zip
-
-
-def obtener_tamano_descomprimido(zip_file):
-    tamano_descomprimido = 0
-
-    for info in zip_file.infolist():
-        tamano_descomprimido += info.file_size
-
-    return tamano_descomprimido
+    return cantidad_archivos_pdf, tamano_zip, tamano_descomprimido
 
 
 with zipfile.ZipFile(archivo_zip, 'r') as zip_file:
-    cantidad_archivos, tamano_zip = contar_archivos_pdf(zip_file)
-    tamano_descomprimido = obtener_tamano_descomprimido(zip_file)
+    cantidad_archivos, tamano_zip, tamano_descomprimido = contar_archivos_pdf(zip_file)
 
-# Muestra la información
 logger.info(f'Nombre del archivo ZIP: {archivo_zip}')
 logger.info(f'Cantidad de archivos PDF contenidos: {cantidad_archivos}')
 logger.info(f'Tamaño total del ZIP: {round((tamano_zip / 1024), 2)} KB')
 logger.info(f'Tamaño descomprimido total: {round((tamano_descomprimido / 1024), 2)} KB')
 logger.info(f'Tamaño promedio de certificado: {round(((tamano_descomprimido / cantidad_archivos) / 1024), 2)} KB')
+# Muestra la información
+
 
 logger.info('*** PROCESO FINALIZADO ***')
