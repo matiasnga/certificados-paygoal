@@ -1,0 +1,81 @@
+[
+  {
+    "Titulo1": "Certificado de Retención de Ingresos Brutos Ciudad de Buenos Aires",
+    "RazonSocial": "PLAY DIGITAL SA",
+    "Direccion": "LIBERTADOR DEL AV. 7208 Piso:4   T:II",
+    "CodigoPostal": "1429",
+    "Localidad": "CIUDAD AUTONOMA BUENOS AIRES",
+    "Provincia": "CIUDAD AUTONOMA BUENOS AIRES",
+    "Fecha": "15-10-2023",
+    "CUITAgente": "30-71682943-6",
+    "NroIIBB": 30716829436,
+    "RazonSocialContribuyente": "GALLO MATIAS NICOLAS",
+    "DireccionContribuyente": "SAN MARTIN AV. 7464",
+    "CodigoPostalContribuyente": "1419",
+    "LocalidadContribuyente": "CIUDAD AUTONOMA BUENOS AIRES",
+    "ProvinciaContribuyente": "CIUDAD AUTONOMA BUENOS AIRES",
+    "CUITContribuyente": "20-31477522-9",
+    "NroCertificado": "2319000000000001",
+    "Impuesto": 901,
+    "Condicion": "Habitualista",
+    "EnPalabras": "En palabras: Pesos argentinos, diez con 0\/100.",
+    "Referencia": "Período de Retenciones: OCTUBRE 2023 - 1era quincena",
+    "NombreApoderado": "Martín Quiroga",
+    "Retenciones": [
+      {
+        "TaxRegimeId": "31",
+        "TaxRegime": "Servicios de pagos, plataformas y aplicaciones informáticas",
+        "BaseRetencion": "$ 500,00",
+        "Alicuota": "2,00 %",
+        "Retencion": "$ 10,00"
+      },
+      {
+        "TaxRegimeId": "TOTAL",
+        "TaxRegime": "",
+        "BaseRetencion": "$ 500,00",
+        "Alicuota": "",
+        "Retencion": "$ 10,00"
+      }
+    ]
+  },
+  {
+    "Titulo1": "Certificado de Retención de Ingresos Brutos Santa Fe",
+    "RazonSocial": "PLAY DIGITAL SA",
+    "Direccion": "LIBERTADOR DEL AV. 7208 Piso:3 Dpto:3.1  T:PPAL",
+    "CodigoPostal": "1429",
+    "Localidad": "CIUDAD AUTONOMA BUENOS AIRES",
+    "Provincia": "CIUDAD AUTONOMA BUENOS AIRES",
+    "Fecha": "15-09-2023",
+    "CUITAgente": "30-71682943-6",
+    "NroIIBB": 30716829436,
+    "RazonSocialContribuyente": "NANNY\'S CAFE S. R. L.",
+    "DireccionContribuyente": "1&#186; DE MAYO 977 Piso:PB Dpto:1",
+    "CodigoPostalContribuyente": "2000",
+    "LocalidadContribuyente": "ROSARIO NORTE",
+    "ProvinciaContribuyente": "SANTA FE",
+    "CUITContribuyente": "30-71755424-4",
+    "NroCertificado": "231700000434",
+    "Impuesto": 921,
+    "Condicion": "Contribuyente local",
+    "EnPalabras": "En palabras: Pesos argentinos, ciento setenta y cinco con 40\\/100.",
+    "Referencia": "Período de Retenciones: SEPTIEMBRE 2023 - 1era quincena",
+    "IdAgrupacionRetenciones": "285",
+    "NombreApoderado": "Martín Quiroga",
+    "Retenciones": [
+      {
+        "TaxRegimeId": "516",
+        "TaxRegime": "Servicios de gestión de pagos y cobros",
+        "BaseRetencion": "$ 8.770,00",
+        "Alicuota": "2,00 %",
+        "Retencion": "$ 175,40"
+      },
+      {
+        "TaxRegimeId": "TOTAL",
+        "TaxRegime": "",
+        "BaseRetencion": "$ 8.770,00",
+        "Alicuota": "",
+        "Retencion": "$ 175,40"
+      }
+    ]
+  }
+]
