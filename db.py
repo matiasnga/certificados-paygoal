@@ -8,6 +8,44 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("certificados-paygoal-db")
 
 
+def execute_sp(db, cuit_agente, periodo, id_impuesto, cuit_contribuyente):
+    global conexion
+    if db == 'dev':
+        conexion = establecer_conexion_dev()
+    elif db == 'replica':
+        conexion = establecer_conexion_replica()
+
+    if conexion:
+        logger.info("La conexión a la base de datos se estableció correctamente." + db)
+        cursor = conexion.cursor()
+        logger.info(
+            f"EXEC SP WithholdingCertificatesByShop {db} {cuit_agente} {periodo} {id_impuesto} {cuit_contribuyente}")
+
+        cursor.execute('EXEC WithholdingCertificatesByShop ?, ?, ?, ?', cuit_agente, periodo, id_impuesto,
+                       cuit_contribuyente)
+        resultado = cursor.fetchall()
+        cursor.close()
+        conexion.close()
+        certs_str = ''
+
+        if resultado:
+            for i in range(len(resultado)):
+                certs_str += str(resultado[i])
+        certs_str = certs_str.replace('\',), (\'', '')
+        certs_str = certs_str.replace('\',)', '')
+        certs_str = certs_str.replace('(\'', '')
+        certs_str = certs_str.replace(r"\'", "'")
+        certs_str = certs_str.replace(r'\"', '"')
+        certs_str = certs_str.replace(r'\\/', '/')
+
+        with open('input_data/' + cuit_agente + '_' + periodo + '_' + db + '.txt', 'w',
+                  encoding='utf-8') as archivo:
+            archivo.write(certs_str)
+        return certs_str
+    else:
+        logger.info("La conexión a la base de datos no se pudo establecer.")
+
+
 def establecer_conexion_replica():
     try:
         # Configura la cadena de conexión
@@ -52,43 +90,3 @@ def establecer_conexion_dev():
     except pyodbc.Error as e:
         print(f"Error al conectar a la base de datos: {e}")
         return None
-
-
-def execute_sp(db, cuit_agente, periodo, id_impuesto, cuit_contribuyente):
-    global conexion
-
-    if db == 'dev':
-        conexion = establecer_conexion_dev()
-    elif db == 'replica':
-        conexion = establecer_conexion_replica()
-
-    if conexion:
-        logger.info("La conexión a la base de datos se estableció correctamente." + db)
-        cursor = conexion.cursor()
-        cursor.execute('EXEC WithholdingCertificatesByShop ?, ?, ?, ?', cuit_agente, periodo, id_impuesto,
-                       cuit_contribuyente)
-        resultado = cursor.fetchall()
-
-        # Inicializa una cadena para concatenar los resultados
-        concatenated_result = ""
-        print(len(resultado))
-        i = 0
-        lista_certificados = ''
-        # Itera a través de las filas y concatena el contenido
-        for i in range(len(resultado)):
-            row = str(resultado[i])[2:-3]
-            # Concatena el contenido de cada fila
-            lista_certificados += row
-            i += 1
-        with open('input_data/sp_data_' + cuit_agente + '_' + periodo + '_' + db + '.txt', 'w', encoding='utf-8') as archivo:
-            archivo.write(lista_certificados)
-
-        print(f"El string se ha guardado en el archivo sp_data.txt.")
-        lista_certificados_str = json.loads(str(lista_certificados))
-
-        # Cierra el cursor y la conexión
-        cursor.close()
-        conexion.close()
-        return lista_certificados_str
-    else:
-        logger.info("La conexión a la base de datos no se pudo establecer.")
